@@ -26,7 +26,10 @@ There are some Kaggle dataset I am interested in, and I have some jupyter notebo
 Then I realized that those competition notebooks only solved on single question that the organizers had asked, so I decided to make a good use of this opportunity to examine some data that I had not worked with before.
 The Annual Developer Survey itself is also a good resources for me to learn the trend in the industry.
 
-
+# Summary
+- Most professional developers have high education experience.
+- A rising cohort of US coders under the age of 18.
+- The popularity of C++ decreased, and Frontend tech stack is hot. This trend seems to be lasting.
 
 # Acknowledgements
 
