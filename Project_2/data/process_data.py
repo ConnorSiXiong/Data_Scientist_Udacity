@@ -1,25 +1,30 @@
 import sys
 import pandas as pd
 from sqlalchemy import create_engine
+from nltk.corpus import stopwords
 
+stop = stopwords.words('english')
 
 def load_data(messages_filepath, categories_filepath):
     
-    ## Loading each csv file
+    # Loading each csv file
     messages = pd.read_csv(messages_filepath)
     categories = pd.read_csv(categories_filepath)
 
     print('Messages: {}'.format(messages.shape))
     print('Categories: {}'.format(categories.shape))
 
-    ## Split and expand categories
+    # remove stop words
+    remove_stopwords(messages)
+
+    # Split and expand categories
     categories = categories['categories'].str.split(pat=';', expand=True)
 
     row = categories.iloc[0, :]
     category_columns = row.map(lambda x: x.split('-')[0])
     categories.columns = category_columns
 
-    ## Convert category values to just numeric 0 or 1
+    # Convert category values to just numeric 0 or 1
     for column in categories:
         # set each value to be the last character of the string
         categories[column] = categories[column].map(lambda x: x[-1])
@@ -27,24 +32,25 @@ def load_data(messages_filepath, categories_filepath):
         # convert column from string to numeric
         categories[column] = categories[column].astype(int)
 
-    ## Remain only 0 and 1
+    # Remain only 0 and 1
     categories.replace(2, 1, inplace=True)
 
-    ## Concat two things and return
+    # Concat two things and return
     result = pd.concat([messages, categories], axis=1)
     print('Merged data: {}'.format(result.shape))
 
     return result
     
-        
     
 def clean_data(df):
-    ## Drop duplicates          
+    # Drop duplicates rows from the data
     df_cleaned = df.drop_duplicates()
-
     return df_cleaned
           
-          
+
+def remove_stopwords(df):
+    df['message'] = df['message'].apply(lambda x: ' '.join.join([word for word in x.split() if word not in (stop)]))
+
 def save_data(df, database_filename):
     """Save the DataFrame data into the database"""
     engine = create_engine('sqlite:///{}'.format(database_filename))
