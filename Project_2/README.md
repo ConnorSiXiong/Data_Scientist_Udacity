@@ -1,14 +1,34 @@
-# Disaster Response Pipeline Project
+# Udacity-Data-Scientist
 
-### Instructions:
-1. Run the following commands in the project's root directory to set up your database and model.
+## Project 2
 
-    - To run ETL pipeline that cleans data and stores in database
-        `python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv` data/DisasterResponse.db`
-    - To run ML pipeline that trains classifier and saves
-        `python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl`
 
-2. Run the following command in the app's directory to run your web app.
-    `python run.py`
+## Disaster Response Pipeline Project
 
-3. Go to http://0.0.0.0:3001/
+In this project, the disaster data collected from Figure Eight was processed and analysed aiming at classifying messages for response and relief agencies.
+
+These data were preprocessed into different categories and were saved in the disaster_categories.csv, so it is not necessary to apply NLP.
+#
+
+## Libraries/Dependencies
+
+1. Install the dependencies first
+
+- ```pip install -r requirements.txt```
+
+2. Run the ETL pipleline
+
+- ```python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db```
+
+  The process data will be saved in ```data/DisasterResponse.db```
+
+3. Machine Learning Inference
+
+- ```python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl```
+
+4. Launch the app
+- ```python run.py```
+
+#
+## Note:
+The file paths may be different in different operation system, you may need to modify it manually.
