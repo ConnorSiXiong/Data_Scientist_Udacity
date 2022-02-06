@@ -15,6 +15,8 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report
 
 def load_data(database_filepath):
+    """Load data from the database and extract the names of the attributes"""
+
     engine = create_engine('sqlite:///{}'.format(database_filepath))
     df = pd.read_sql_table('disaster_response_df', engine)
     
@@ -32,6 +34,7 @@ def load_data(database_filepath):
     return X, Y, category_names
 
 def tokenize(text):
+    """A text preprocessing step."""
     tokens = word_tokenize(text)
     lemmatizer = WordNetLemmatizer()
 
@@ -44,7 +47,7 @@ def tokenize(text):
 
 
 def build_model():
-    
+    """Build the model aotu training pipeline."""
     pipeline = Pipeline([
         ('vect', CountVectorizer(tokenizer = tokenize)),
         ('tfidf', TfidfTransformer()),
@@ -65,10 +68,12 @@ def build_model():
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
+    """Evaluate the performance of model"""
     y_pred = model.predict(X_test).astype(int)
     print(classification_report(Y_test, y_pred, target_names=category_names))
 
 def save_model(model, model_filepath):
+    """Save the best model."""
     pickle.dump(model, open(model_filepath, "wb"))
 
 
