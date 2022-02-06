@@ -7,7 +7,6 @@
 
 In this project, the disaster data collected from Figure Eight was processed and analysed aiming at classifying messages for response and relief agencies.
 
-These data were preprocessed into different categories and were saved in the disaster_categories.csv, so it is not necessary to apply NLP.
 #
 
 ## Libraries/Dependencies
