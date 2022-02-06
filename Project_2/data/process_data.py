@@ -1,6 +1,5 @@
 import sys
 import pandas as pd
-import numpy as np
 from sqlalchemy import create_engine
 
 
@@ -42,11 +41,12 @@ def load_data(messages_filepath, categories_filepath):
 def clean_data(df):
     ## Drop duplicates          
     df_cleaned = df.drop_duplicates()
-          
+
     return df_cleaned
           
           
 def save_data(df, database_filename):
+    """Save the DataFrame data into the database"""
     engine = create_engine('sqlite:///{}'.format(database_filename))
     df.to_sql('disaster_response_df', engine, if_exists='replace', index=False)
 

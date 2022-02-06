@@ -1,14 +1,12 @@
 import sys
 import pandas as pd
-import numpy as np
-import re
 from sqlalchemy import create_engine
 import pickle
 
 import nltk
-nltk.download(['punkt', 'wordnet', 'averaged_perceptron_tagger'])
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
+nltk.download(['punkt', 'wordnet', 'averaged_perceptron_tagger'])
 
 from sklearn.pipeline import Pipeline, FeatureUnion
 from sklearn.model_selection import train_test_split, GridSearchCV
@@ -52,7 +50,17 @@ def build_model():
         ('tfidf', TfidfTransformer()),
         ('clf', RandomForestClassifier())
     ])
-    
+
+    parameters = {
+         "vect__max_df": (0.5, 0.75, 1.0),
+        "vect__ngram_range": ((1, 1), (1, 2)),  # unigrams or bigrams
+        "clf__max_iter": (20,),
+        "clf__alpha": (0.00001, 0.000001),
+        "clf__penalty": ("l2", "elasticnet"),
+    }
+
+    model = GridSearchCV(pipeline, parameters, verbose=1)
+
     return pipeline
 
 
