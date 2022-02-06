@@ -30,5 +30,30 @@ These data were preprocessed into different categories and were saved in the dis
 - ```python run.py```
 
 #
+
+# Structure
+```
+project_2
+│   README.md
+│   requirements.txt
+│
+└───app
+│   │   run.py  # Flask file that runs app
+│   │───templates
+│       │   go.html  # classification result page of web app
+│       │   master.html  # classification result page of web app
+│   
+└───data
+│    │   process_data.py
+│    │   disaster_categories.csv
+│    │   disaster_messages.csv
+│    │   DisasterResponse.db (sample, not upload)  # database to save clean data to
+│   
+└───models
+│    │   train_classifier.py
+│    │   classifier.pkl (sample, not upload)  # saved model
+```
+
+#
 ## Note:
 The file paths may be different in different operation system, you may need to modify it manually.
